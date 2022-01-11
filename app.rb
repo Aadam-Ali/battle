@@ -20,6 +20,8 @@ class Battle < Sinatra::Base
   def load_players
     @player_one = $game.player_one
     @player_two = $game.player_two
+    @current_player = $game.current_player
+    @other_player = $game.other_player
   end
 
   get '/play' do
@@ -29,7 +31,8 @@ class Battle < Sinatra::Base
 
   get '/attack' do
     load_players
-    $game.attack(@player_two)
+    $game.attack($game.other_player)
+    $game.advance_turn
     erb(:attack)
   end
 end

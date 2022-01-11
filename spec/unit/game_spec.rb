@@ -23,4 +23,36 @@ describe Game do
       expect(subject.player_two).to eq player_two
     end
   end
+
+  describe '#turn' do
+    it 'starts at 0' do
+      expect(subject.turn).to eq(0)
+    end
+  end
+
+  describe '#advance_turn' do
+    it 'increases the turn number' do
+      expect { subject.advance_turn }.to change { subject.turn }.by(1)
+    end
+  end
+
+  describe '#current_player' do
+    it 'returns player one on the first turn' do
+      expect(subject.current_player).to eq player_one
+    end
+    it 'returns player two on the second turn' do
+      subject.advance_turn
+      expect(subject.current_player).to eq player_two
+    end
+  end
+
+  describe '#other_player' do
+    it 'returns player two on the first turn' do
+      expect(subject.other_player).to eq player_two
+    end
+    it 'returns player one on the second turn' do
+      subject.advance_turn
+      expect(subject.other_player).to eq player_one
+    end
+  end
 end
