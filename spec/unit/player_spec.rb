@@ -17,15 +17,4 @@ describe Player do
       expect { aadam.receive_damage }.to change { aadam.hp }.by -10 
     end
   end
-
-  describe '#attack' do
-    it "calls receive damage" do
-      expect(sam).to receive(:receive_damage)
-      aadam.attack(sam)
-    end
-
-    it "causes the other player to lose HP" do
-      expect { aadam.attack sam }.to change { sam.hp }.by -10
-    end
-  end
 end
