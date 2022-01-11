@@ -6,4 +6,11 @@ feature 'players can attack each other' do
     click_link 'Attack'
     expect(page).to have_content "Aadam attacked Sam"
   end
+
+  scenario 'player 1 attacks player 2 and updates hp' do
+    sign_in_and_play
+    click_link 'Attack'
+    click_link 'Continue'
+    expect(page).to have_content 'Sam: 90HP'
+  end
 end

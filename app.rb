@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
-require 'player'
+require_relative 'lib/player'
 
 class Battle < Sinatra::Base
   configure :development do
@@ -17,18 +17,19 @@ class Battle < Sinatra::Base
     redirect '/play'
   end
 
-  def load_player_names
-    @player_one_name = $player_one.name
-    @player_two_name = $player_two.name
+  def load_player
+    @player_one = $player_one
+    @player_two = $player_two
   end
 
   get '/play' do
-    load_player_names
+    load_player
     erb(:play)
   end
 
   get '/attack' do
-    load_player_names
+    load_player
+    @player_one.attack(@player_two)
     erb(:attack)
   end
 end
